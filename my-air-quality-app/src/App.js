@@ -29,13 +29,16 @@ const App = () => {
   useEffect(() => {
     const getLocation = () => {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
-        }, (error) => {
-          console.error(error);
-          setError("Unable to retrieve location.");
-        });
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+          },
+          (error) => {
+            console.error(error);
+            setError("Unable to retrieve location.");
+          }
+        );
       } else {
         setError("Geolocation is not supported by this browser.");
       }
