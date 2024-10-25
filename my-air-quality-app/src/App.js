@@ -1,59 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function App() {
-  const [location, setLocation] = useState({ lat: null, lon: null });
+const App = () => {
   const [airQuality, setAirQuality] = useState(null);
   const [error, setError] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
-  // Get user's location when the component mounts
+  // Fetch air quality data
+  const fetchAirQuality = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.openaq.org/v1/measurements?latitude=${latitude}&longitude=${longitude}&order_by=desc&limit=1`
+      );
+
+      if (response.data.results.length > 0) {
+        setAirQuality(response.data.results[0]); // Get the latest result
+      } else {
+        setError("No data available for this location.");
+      }
+    } catch (error) {
+      console.error("Error fetching air quality data:", error);
+      setError("Failed to fetch air quality data.");
+    }
+  };
+
+  // Get user's location
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setLocation({ lat: latitude, lon: longitude });
-      },
-      (error) => setError("Error getting location. Please enable location services."),
-      { enableHighAccuracy: true }
-    );
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
+        }, (error) => {
+          console.error(error);
+          setError("Unable to retrieve location.");
+        });
+      } else {
+        setError("Geolocation is not supported by this browser.");
+      }
+    };
+
+    getLocation();
   }, []);
 
-  // Fetch air quality data based on location
+  // Fetch data when latitude and longitude are available
   useEffect(() => {
-    if (location.lat && location.lon) {
-      const fetchAirQuality = async () => {
-        try {
-          const response = await axios.get(
-            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.lat}&lon=${location.lon}&appid=${process.env.REACT_APP_API_KEY}`
-          );
-          setAirQuality(response.data.list[0].components);
-        } catch (error) {
-          setError("Failed to fetch air quality data.");
-        }
-      };
+    if (latitude && longitude) {
       fetchAirQuality();
     }
-  }, [location]);
+  }, [latitude, longitude]);
 
   return (
-    <div className="App" style={{ fontFamily: 'Arial', textAlign: 'center', padding: '20px' }}>
+    <div>
       <h1>Air Quality in Your Area</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p>{error}</p>}
       {airQuality ? (
-        <div style={{ marginTop: '20px' }}>
-          <h2>Current Pollution Levels:</h2>
-          <p>PM2.5: {airQuality.pm2_5} µg/m³</p>
-          <p>PM10: {airQuality.pm10} µg/m³</p>
-          <p>Carbon Monoxide (CO): {airQuality.co} µg/m³</p>
-          <p>Ozone (O₃): {airQuality.o3} µg/m³</p>
-          <p>Sulfur Dioxide (SO₂): {airQuality.so2} µg/m³</p>
-          <p>Nitrogen Dioxide (NO₂): {airQuality.no2} µg/m³</p>
+        <div>
+          <h2>Latest Air Quality Data</h2>
+          <p>Location: {airQuality.city}</p>
+          <p>PM2.5: {airQuality.value} µg/m³</p>
+          <p>Measurement Time: {new Date(airQuality.date.local).toLocaleString()}</p>
         </div>
       ) : (
-        !error && <p>Loading air quality data...</p>
+        <p>Loading air quality data...</p>
       )}
     </div>
   );
-}
+};
 
 export default App;
