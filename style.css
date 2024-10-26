@@ -22,8 +22,12 @@ h1 {
     color: #333;
 }
 
-#location, #air-quality {
+#location, #air-quality, #weather, #advice, #last-updated {
     margin-top: 10px;
     font-size: 18px;
     color: #555;
+}
+
+canvas {
+    margin-top: 20px;
 }
