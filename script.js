@@ -1,5 +1,6 @@
 const API_KEY = 'YOUR_API_KEY_HERE';
 
+// Function to fetch AQI data
 function fetchAQIData(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
     
@@ -55,22 +56,22 @@ function displayAQI(aqi) {
     // Color-coding based on AQI value ranges
     if (aqi === 1) {
         description.innerText = "Good (0-50)";
-        aqiDisplay.style.color = "#00e400";
+        aqiDisplay.style.color = "#00e400"; // Green
     } else if (aqi === 2) {
         description.innerText = "Fair (51-100)";
-        aqiDisplay.style.color = "#ffff00";
+        aqiDisplay.style.color = "#ffff00"; // Yellow
     } else if (aqi === 3) {
         description.innerText = "Moderate (101-150)";
-        aqiDisplay.style.color = "#ff7e00";
+        aqiDisplay.style.color = "#ff7e00"; // Orange
     } else if (aqi === 4) {
         description.innerText = "Poor (151-200)";
-        aqiDisplay.style.color = "#ff0000";
+        aqiDisplay.style.color = "#ff0000"; // Red
     } else if (aqi === 5) {
         description.innerText = "Very Poor (201-300)";
-        aqiDisplay.style.color = "#99004c";
+        aqiDisplay.style.color = "#99004c"; // Purple
     } else {
         description.innerText = "Severe (300+)";
-        aqiDisplay.style.color = "#7e0023";
+        aqiDisplay.style.color = "#7e0023"; // Dark Red
     }
 }
 
@@ -86,4 +87,5 @@ function displayPollutants(components) {
     }
 }
 
-// Initialize t
+// Initialize the app by requesting location
+window.onload = getLocationAndFetchAQI;
