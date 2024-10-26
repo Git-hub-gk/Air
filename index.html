@@ -3,37 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Air Quality Monitoring</title>
+    <title>Air Quality Monitoring and Improvement</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Air Quality Monitoring</h1>
-        <div id="clock">Loading time...</div>
+    <header class="header">
+        <h1>Urban Air Quality Monitoring & Improvement</h1>
+        <p>Low-cost, scalable solution for cleaner environments in urban areas</p>
+    </header>
 
-        <div class="card" id="location-card">
-            <h2>Location</h2>
-            <div id="location">Fetching location...</div>
-        </div>
+    <section id="overview">
+        <h2>Project Overview</h2>
+        <p>Our solution provides real-time air quality monitoring and improvement suggestions for high-density urban areas, aiming to reduce health hazards and create sustainable living environments.</p>
+    </section>
 
-        <div class="card" id="air-quality-card">
-            <h2>Air Quality</h2>
-            <div id="air-quality" class="loading-spinner">Loading...</div>
-        </div>
+    <section id="location-card">
+        <h2>Current Location</h2>
+        <div id="location">Fetching location...</div>
+    </section>
 
-        <div class="card" id="weather-card">
-            <h2>Weather</h2>
-            <div id="weather" class="loading-spinner">Loading...</div>
-        </div>
+    <section id="air-quality-card">
+        <h2>Current Air Quality</h2>
+        <div id="air-quality" class="loading-spinner">Loading AQI...</div>
+    </section>
 
-        <div class="card" id="advice-card">
-            <h2>Health Advice</h2>
-            <div id="advice">Health advice will appear here...</div>
-        </div>
-
+    <section id="data-insights">
+        <h2>Data Insights</h2>
         <canvas id="aqi-chart" width="300" height="200"></canvas>
         <div id="last-updated">Last updated: --</div>
-    </div>
+    </section>
+
+    <section id="suggestions-card">
+        <h2>Improvement Suggestions</h2>
+        <div id="suggestions">Suggestions based on AQI will appear here...</div>
+    </section>
+
+    <footer class="footer">
+        <h3>Scalability Vision</h3>
+        <p>Our aim is to provide an adaptable, low-cost air monitoring network suitable for cities worldwide, allowing proactive air quality improvements and ensuring healthy environments for all.</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>

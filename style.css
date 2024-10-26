@@ -8,86 +8,69 @@
 /* Body styling */
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background: linear-gradient(120deg, #84fab0, #8fd3f4);
-}
-
-/* Container styling */
-.container {
-    text-align: center;
-    max-width: 500px;
-    width: 100%;
-}
-
-/* Main header */
-h1 {
-    color: #ffffff;
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-/* Clock */
-#clock {
+    background: linear-gradient(120deg, #66bb6a, #26a69a);
     color: #333;
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    animation: fadeIn 1s ease-out;
 }
 
-/* Card styling */
-.card {
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    margin: 15px;
+/* Header */
+.header {
+    text-align: center;
     padding: 20px;
-    animation: fadeInUp 0.8s ease-out;
-    transition: transform 0.3s;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card:hover {
-    transform: translateY(-5px);
+.header h1 {
+    font-size: 2.5em;
+    color: #4caf50;
 }
 
-/* Card headers */
-.card h2 {
-    color: #4a90e2;
+.header p {
     font-size: 1.2em;
+    color: #333;
+}
+
+/* Section styling */
+section {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Section headers */
+section h2 {
+    color: #26a69a;
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
 
-/* Last updated section */
-#last-updated {
-    font-size: 0.9em;
-    color: #666;
-    margin-top: 10px;
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    color: #ffffff;
+    background: #333333;
 }
 
-/* AQI chart */
-canvas {
-    margin-top: 20px;
+.footer h3 {
+    font-size: 1.5em;
 }
 
 /* Loading spinner */
-.loading-spinner {
-    position: relative;
-}
-
 .loading-spinner:after {
     content: '';
-    width: 20px;
-    height: 20px;
-    border: 3px solid #4a90e2;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
     display: inline-block;
-    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #26a69a;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
 }
 
 /* Keyframe animations */
@@ -95,7 +78,7 @@ canvas {
     to { transform: rotate(360deg); }
 }
 
-@keyframes fadeInUp {
+@keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(30px);

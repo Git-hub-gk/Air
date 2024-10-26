@@ -1,34 +1,22 @@
-const API_KEY = 'YOUR_API_KEY'; // Replace with your actual API key
+const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with actual API key
 
-// Real-time clock
-function updateClock() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    document.getElementById("clock").innerText = `${hours}:${minutes}:${seconds}`;
-}
-setInterval(updateClock, 1000);
-
-// Get location and fetch data
+// Fetch location and initialize app
 function fetchLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-        document.getElementById("location").innerText = "Geolocation is not supported by this browser.";
+        document.getElementById("location").innerText = "Geolocation not supported.";
     }
 }
 
-// Display user location and fetch air quality and weather data
+// Display user location and fetch data
 function showPosition(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
     document.getElementById("location").innerText = `Lat: ${latitude.toFixed(2)}, Lon: ${longitude.toFixed(2)}`;
-    fadeIn("location-card");
 
     fetchAirQualityData(latitude, longitude);
-    fetchWeatherData(latitude, longitude);
 }
 
 // Fetch air quality data
@@ -37,56 +25,37 @@ function fetchAirQualityData(lat, lon) {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            const airQualityIndex = data.list[0].main.aqi;
-            const aqiDescriptions = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
-            const description = aqiDescriptions[airQualityIndex - 1];
-            document.getElementById("air-quality").innerText = `AQI: ${airQualityIndex} (${description})`;
-            provideHealthAdvice(airQualityIndex);
-            fadeIn("air-quality-card");
+            const aqi = data.list[0].main.aqi;
+            displayAirQuality(aqi);
+            provideImprovementSuggestions(aqi);
         })
-        .catch(error => {
-            document.getElementById("air-quality").innerText = "Failed to load data.";
+        .catch(() => {
+            document.getElementById("air-quality").innerText = "Unable to retrieve data.";
         });
 }
 
-// Fetch weather data
-function fetchWeatherData(lat, lon) {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const temperature = data.main.temp;
-            const weatherDescription = data.weather[0].description;
-            document.getElementById("weather").innerText = `${temperature}°C, ${weatherDescription}`;
-            fadeIn("weather-card");
-        })
-        .catch(error => {
-            document.getElementById("weather").innerText = "Failed to load data.";
-        });
+// Display air quality index and description
+function displayAirQuality(aqi) {
+    const aqiDescriptions = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
+    document.getElementById("air-quality").innerText = `AQI: ${aqi} - ${aqiDescriptions[aqi - 1]}`;
 }
 
-// Provide health advice based on AQI
-function provideHealthAdvice(aqi) {
-    const adviceText = [
-        "Enjoy outdoor activities.",
-        "Limit prolonged outdoor activities.",
-        "Sensitive groups limit outdoor activities.",
-        "Avoid outdoor activities.",
-        "Stay indoors with air purifiers."
+// Provide improvement suggestions based on AQI level
+function provideImprovementSuggestions(aqi) {
+    const suggestions = [
+        "Enjoy outdoor activities as usual.",
+        "Limit outdoor activities if sensitive.",
+        "Avoid prolonged outdoor activities.",
+        "Stay indoors; avoid outdoor exercise.",
+        "Stay indoors; use air purifiers if possible."
     ];
-    document.getElementById("advice").innerText = adviceText[aqi - 1];
-    fadeIn("advice-card");
-}
-
-// Fade-in effect
-function fadeIn(elementId) {
-    document.getElementById(elementId).style.opacity = "1";
-    document.getElementById(elementId).style.transform = "translateY(0)";
+    document.getElementById("suggestions").innerText = suggestions[aqi - 1];
 }
 
 // Show error if location fails
 function showError(error) {
-    document.getElementById("location").innerText = "Location access denied.";
+    document.getElementById("location").innerText = "Unable to retrieve location.";
 }
 
+// Initialize location fetching on load
 window.onload = fetchLocation;
