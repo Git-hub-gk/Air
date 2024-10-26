@@ -1,5 +1,4 @@
-const API_KEY = 3e92fe35e0aaa7695af1cd7c2de8d4a9
-;
+const API_KEY = 3e92fe35e0aaa7695af1cd7c2de8d4a9;
 
 function fetchAQIData(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
@@ -15,8 +14,8 @@ function fetchAQIData(lat, lon) {
             displayPollutants(data.list[0].components);
         })
         .catch(error => {
-            document.getElementById("aqi-value").innerText = "Error fetching data";
-            document.getElementById("aqi-description").innerText = "Please check API and connection.";
+            document.getElementById("aqi-value").innerText = "Error retrieving data";
+            document.getElementById("aqi-description").innerText = "Please check your connection.";
             console.error(error);
         });
 }
@@ -29,48 +28,7 @@ function getLocationAndFetchAQI() {
                 fetchAQIData(lat, lon);
             },
             () => {
-                document.getElementById("aqi-value").innerText = "Location permission denied";
+                document.getElementById("aqi-value").innerText = "Location access denied";
                 document.getElementById("aqi-description").innerText = "Enable location access to view data.";
             }
-        );
-    } else {
-        document.getElementById("aqi-value").innerText = "Geolocation not supported";
-    }
-}
-
-function displayAQI(aqi) {
-    const aqiDisplay = document.getElementById("aqi-value");
-    const description = document.getElementById("aqi-description");
-
-    aqiDisplay.innerText = aqi;
-
-    if (aqi === 1) {
-        description.innerText = "Good (0-50)";
-        aqiDisplay.style.color = "#00e400";
-    } else if (aqi === 2) {
-        description.innerText = "Fair (51-100)";
-        aqiDisplay.style.color = "#ffff00";
-    } else if (aqi === 3) {
-        description.innerText = "Moderate (101-150)";
-        aqiDisplay.style.color = "#ff7e00";
-    } else if (aqi === 4) {
-        description.innerText = "Poor (151-200)";
-        aqiDisplay.style.color = "#ff0000";
-    } else if (aqi === 5) {
-        description.innerText = "Very Poor (201-300)";
-        aqiDisplay.style.color = "#99004c";
-    }
-}
-
-function displayPollutants(components) {
-    const pollutantsList = document.getElementById("pollutants-list");
-    pollutantsList.innerHTML = "";
-
-    for (const [pollutant, value] of Object.entries(components)) {
-        const li = document.createElement("li");
-        li.innerText = `${pollutant.toUpperCase()}: ${value.toFixed(2)} µg/m³`;
-        pollutantsList.appendChild(li);
-    }
-}
-
-window.onload = getLocationAndFetchAQI;
+       
