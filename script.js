@@ -1,4 +1,5 @@
-const API_KEY = '3e92fe35e0aaa7695af1cd7c2de8d4a9';
+const API_KEY = '3e92fe35e0aaa7695af1cd7c2de8d4a97a0a5ffa8c5b50442575ba9d2cf3a03d4b192a3763a6a59dfef1f14121a94c11';
+
 
 function fetchAQIData(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
