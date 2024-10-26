@@ -14,7 +14,7 @@ function showPosition(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    document.getElementById("location").innerText = `Lat: ${latitude.toFixed(2)}, Lon: ${longitude.toFixed(2)}`;
+    document.getElementById("location").innerText = `Latitude: ${latitude.toFixed(2)}, Longitude: ${longitude.toFixed(2)}`;
 
     fetchAirQualityData(latitude, longitude);
 }

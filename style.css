@@ -5,60 +5,63 @@
     box-sizing: border-box;
 }
 
-/* Body styling */
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(120deg, #66bb6a, #26a69a);
+    background: linear-gradient(135deg, #84fab0, #8fd3f4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: #333;
 }
 
 /* Header */
 .header {
+    width: 100%;
     text-align: center;
     padding: 20px;
     background: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .header h1 {
-    font-size: 2.5em;
+    font-size: 2.2em;
     color: #4caf50;
 }
 
 .header p {
-    font-size: 1.2em;
     color: #333;
+    font-size: 1.1em;
 }
 
-/* Section styling */
-section {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
+/* Main content styling */
+main {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Box styling */
+.box {
+    width: 100%;
     background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
-    animation: fadeIn 0.8s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* Section headers */
-section h2 {
+.box h2 {
     color: #26a69a;
     font-size: 1.5em;
     margin-bottom: 10px;
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 15px;
-    color: #ffffff;
-    background: #333333;
-}
-
-.footer h3 {
-    font-size: 1.5em;
 }
 
 /* Loading spinner */
@@ -67,24 +70,35 @@ section h2 {
     display: inline-block;
     width: 18px;
     height: 18px;
-    border: 2px solid #26a69a;
+    border: 3px solid #4a90e2;
     border-radius: 50%;
     border-top-color: transparent;
     animation: spin 0.8s linear infinite;
 }
 
-/* Keyframe animations */
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
+/* Fade-in effect */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #333333;
+    color: #ffffff;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.footer p {
+    font-size: 0.9em;
+}
+
+/* Keyframe animations */
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }

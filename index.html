@@ -3,44 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Air Quality Monitoring and Improvement</title>
+    <title>Urban Air Quality Monitoring & Improvement</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
-        <h1>Urban Air Quality Monitoring & Improvement</h1>
-        <p>Low-cost, scalable solution for cleaner environments in urban areas</p>
+        <h1>Urban Air Quality Monitoring</h1>
+        <p>A scalable, low-cost solution for cleaner air in cities.</p>
     </header>
 
-    <section id="overview">
-        <h2>Project Overview</h2>
-        <p>Our solution provides real-time air quality monitoring and improvement suggestions for high-density urban areas, aiming to reduce health hazards and create sustainable living environments.</p>
-    </section>
+    <main>
+        <!-- Project Overview -->
+        <div class="box" id="overview-box">
+            <h2>Project Overview</h2>
+            <p>This solution provides real-time air quality data to reduce health risks and enhance urban living standards.</p>
+        </div>
 
-    <section id="location-card">
-        <h2>Current Location</h2>
-        <div id="location">Fetching location...</div>
-    </section>
+        <!-- Location and Air Quality -->
+        <div class="box" id="location-box">
+            <h2>Your Location</h2>
+            <div id="location">Locating...</div>
+        </div>
 
-    <section id="air-quality-card">
-        <h2>Current Air Quality</h2>
-        <div id="air-quality" class="loading-spinner">Loading AQI...</div>
-    </section>
+        <div class="box" id="air-quality-box">
+            <h2>Air Quality Index (AQI)</h2>
+            <div id="air-quality" class="loading-spinner">Loading...</div>
+        </div>
 
-    <section id="data-insights">
-        <h2>Data Insights</h2>
-        <canvas id="aqi-chart" width="300" height="200"></canvas>
-        <div id="last-updated">Last updated: --</div>
-    </section>
+        <!-- Data Insights -->
+        <div class="box" id="data-insights-box">
+            <h2>Data Insights</h2>
+            <canvas id="aqi-chart" width="300" height="200"></canvas>
+            <div id="last-updated">Last updated: --</div>
+        </div>
 
-    <section id="suggestions-card">
-        <h2>Improvement Suggestions</h2>
-        <div id="suggestions">Suggestions based on AQI will appear here...</div>
-    </section>
+        <!-- Improvement Suggestions -->
+        <div class="box" id="suggestions-box">
+            <h2>Improvement Suggestions</h2>
+            <div id="suggestions">Advice based on AQI will display here.</div>
+        </div>
+
+        <!-- Scalability Vision -->
+        <div class="box" id="vision-box">
+            <h2>Scalability Vision</h2>
+            <p>Our goal is to create an adaptable air quality network that can serve high-density urban areas worldwide.</p>
+        </div>
+    </main>
 
     <footer class="footer">
-        <h3>Scalability Vision</h3>
-        <p>Our aim is to provide an adaptable, low-cost air monitoring network suitable for cities worldwide, allowing proactive air quality improvements and ensuring healthy environments for all.</p>
+        <p>© 2024 Urban Air Quality Monitoring & Improvement Project</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
