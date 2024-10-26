@@ -1,32 +1,58 @@
 const API_KEY = 'YOUR_API_KEY_HERE';
 
-// Fetch AQI data
-function fetchAQIData() {
-    const lat = 26.9124; // Jaipur latitude
-    const lon = 75.7873; // Jaipur longitude
+function fetchAQIData(lat, lon) {
     const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
     
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Server responded with status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            if (!data || !data.list || !data.list[0]) {
+                throw new Error("Unexpected API response format.");
+            }
             const aqi = data.list[0].main.aqi;
             displayAQI(aqi);
             displayPollutants(data.list[0].components);
         })
         .catch(error => {
             console.error("Error fetching AQI data:", error);
-            document.getElementById("aqi-value").innerText = "Data unavailable";
+            document.getElementById("aqi-value").innerText = "Unable to retrieve data.";
+            document.getElementById("aqi-description").innerText = "Please check your API key and network connection.";
         });
 }
 
-// Display AQI Value
+// Function to get the user's current location
+function getLocationAndFetchAQI() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                fetchAQIData(lat, lon);
+            },
+            (error) => {
+                console.error("Error getting location:", error);
+                document.getElementById("aqi-value").innerText = "Location permission required";
+                document.getElementById("aqi-description").innerText = "Enable location to view AQI data.";
+            }
+        );
+    } else {
+        document.getElementById("aqi-value").innerText = "Geolocation not supported";
+    }
+}
+
+// Display AQI Value with color and description based on AQI level
 function displayAQI(aqi) {
     const aqiDisplay = document.getElementById("aqi-value");
     const description = document.getElementById("aqi-description");
 
     aqiDisplay.innerText = aqi;
 
-    // Set AQI description and color based on range
+    // Color-coding based on AQI value ranges
     if (aqi === 1) {
         description.innerText = "Good (0-50)";
         aqiDisplay.style.color = "#00e400";
@@ -48,7 +74,7 @@ function displayAQI(aqi) {
     }
 }
 
-// Display Pollutant Details
+// Display pollutant details
 function displayPollutants(components) {
     const pollutantsList = document.getElementById("pollutants-list");
     pollutantsList.innerHTML = "";
@@ -60,5 +86,4 @@ function displayPollutants(components) {
     }
 }
 
-// Initialize the app on load
-window.onload = fetchAQIData;
+// Initialize t
