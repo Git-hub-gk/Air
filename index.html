@@ -3,47 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaipur Air Quality Monitoring</title>
+    <title>Air Quality Monitoring</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="sidebar">
-        <h2>Jaipur Air Quality</h2>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#aqi-info">AQI Information</a></li>
-            <li><a href="#pollutants">Pollutants</a></li>
-            <li><a href="#map">Map</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <!-- Header -->
+    <div class="container">
         <header class="header">
-            <h1>Live Air Quality in Jaipur</h1>
-            <p>Real-time air quality index and pollutant levels</p>
+            <h1>Real-Time Air Quality Monitoring</h1>
+            <p>Track and improve air quality in urban areas</p>
         </header>
 
-        <!-- AQI Information -->
-        <section id="aqi-info" class="card">
-            <h2>Current Air Quality Index (AQI)</h2>
-            <div id="aqi-value" class="aqi-display">Loading...</div>
-            <p id="aqi-description"></p>
-        </section>
+        <section class="content">
+            <!-- AQI Information Box -->
+            <div class="card" id="aqi-card">
+                <h2>Air Quality Index (AQI)</h2>
+                <div class="aqi-value" id="aqi-value">Loading...</div>
+                <p id="aqi-description"></p>
+            </div>
 
-        <!-- Pollutants Information -->
-        <section id="pollutants" class="card">
-            <h2>Pollutants</h2>
-            <ul id="pollutants-list">Loading pollutant details...</ul>
-        </section>
+            <!-- Pollutants Information Box -->
+            <div class="card" id="pollutants-card">
+                <h2>Pollutants</h2>
+                <ul id="pollutants-list">Loading pollutant details...</ul>
+            </div>
 
-        <!-- Map Section -->
-        <section id="map" class="card">
-            <h2>Map View</h2>
-            <p>Check air quality across Jaipur.</p>
-            <div id="map-container">Map loading...</div>
+            <!-- Map View Section -->
+            <div class="card" id="map-card">
+                <h2>Map View</h2>
+                <div id="map-container">Map loading...</div>
+            </div>
         </section>
-    </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
