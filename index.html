@@ -3,19 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Air Quality Monitoring</title>
+    <title>Premium Air Quality Monitoring</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Air Quality Monitoring</h1>
-        <div id="location">Fetching location...</div>
-        <div id="air-quality">Air Quality Data Loading...</div>
-        <div id="weather">Weather Data Loading...</div>
+        <div id="clock">Loading time...</div>
+
+        <div class="card" id="location-card">
+            <h2>Location</h2>
+            <div id="location">Fetching location...</div>
+        </div>
+
+        <div class="card" id="air-quality-card">
+            <h2>Air Quality</h2>
+            <div id="air-quality" class="loading-spinner">Loading...</div>
+        </div>
+
+        <div class="card" id="weather-card">
+            <h2>Weather</h2>
+            <div id="weather" class="loading-spinner">Loading...</div>
+        </div>
+
+        <div class="card" id="advice-card">
+            <h2>Health Advice</h2>
+            <div id="advice">Health advice will appear here...</div>
+        </div>
+
         <canvas id="aqi-chart" width="300" height="200"></canvas>
-        <div id="advice">Health advice will appear here...</div>
         <div id="last-updated">Last updated: --</div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
