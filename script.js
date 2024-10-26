@@ -75,4 +75,18 @@ function provideHealthAdvice(aqi) {
         "Stay indoors with air purifiers."
     ];
     document.getElementById("advice").innerText = adviceText[aqi - 1];
-  
+    fadeIn("advice-card");
+}
+
+// Fade-in effect
+function fadeIn(elementId) {
+    document.getElementById(elementId).style.opacity = "1";
+    document.getElementById(elementId).style.transform = "translateY(0)";
+}
+
+// Show error if location fails
+function showError(error) {
+    document.getElementById("location").innerText = "Location access denied.";
+}
+
+window.onload = fetchLocation;
